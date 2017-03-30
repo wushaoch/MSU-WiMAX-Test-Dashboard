@@ -1,0 +1,32 @@
+datafeed_callback( {
+    "type":"FeatureCollection", 
+    "metadata": {
+        "generated": 1490900696000, 
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp", 
+        "title": "USGS Magnitude 2.5+ Earthquakes, Past Week", 
+        "status": 200, 
+        "api": "1.5.7", 
+        "count": 255
+           },
+    "features":
+    [ 
+      // insert entries
+      {
+        "type":"Feature", "properties": {
+            "mag": 7.1,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.481115, 42.725166] // [longitude, latitude]
+        }
+        , "id":"us20008u42"
+      }
+
+
+
+    ] //end of "features"
+      ,  "bbox":[-179.6897, -60.5845, 0, 179.8707, 69.6244, 556.1]
+  }
+
+);

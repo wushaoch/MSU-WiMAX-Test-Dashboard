@@ -21,7 +21,7 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
+          zoom: 2,
           center: {lat: 42.725166, lng: -84.481115},
           mapTypeId: 'terrain'
         });
@@ -44,7 +44,7 @@
         return {
           path: google.maps.SymbolPath.CIRCLE,
           fillColor: 'green',
-          fillOpacity: .2,
+          fillOpacity: .5,
           scale: Math.pow(2, magnitude) / 2,
           strokeColor: 'white',
           strokeWeight: .5
