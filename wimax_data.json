@@ -1,0 +1,81 @@
+datafeed_callback( {
+    "type":"FeatureCollection", 
+    "metadata": {
+        "generated": 1490900696000, 
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp", 
+        "title": "USGS Magnitude 2.5+ Earthquakes, Past Week", 
+        "status": 200, 
+        "api": "1.5.7", 
+        "count": 255
+           },
+    "features":
+    [ 
+      // insert entries
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 7.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.486161, 42.716021] // [longitude, latitude]
+        }
+        , "id":"us20008u42"
+      },
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 10.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.484660, 42.717682] // [longitude, latitude]
+        }
+        , "id":"BSU"
+      },
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 5.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.493688, 42.712342] // [longitude, latitude]
+        }
+        , "id":"data1"
+      },
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 2.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.489630, 42.704596] // [longitude, latitude]
+        }
+        , "id":"data2"
+      },
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 0.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.4784421, 42.7046888] // [longitude, latitude]
+        }
+        , "id":"data3"
+      },
+
+
+
+    ] //end of "features"
+      ,  "bbox":[-179.6897, -60.5845, 0, 179.8707, 69.6244, 556.1]
+  }
+
+);
