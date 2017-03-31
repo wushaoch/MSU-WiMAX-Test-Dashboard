@@ -11,6 +11,7 @@ datafeed_callback( {
     "features":
     [ 
       // insert entries
+      // ----------------------------------
       {
         "type":"Feature", "properties": {
             "throughput": 7.0,
@@ -22,7 +23,7 @@ datafeed_callback( {
         }
         , "id":"us20008u42"
       },
-
+      // ----------------------------------
       {
         "type":"Feature", "properties": {
             "throughput": 10.0,
@@ -34,7 +35,7 @@ datafeed_callback( {
         }
         , "id":"BSU"
       },
-
+      // ----------------------------------
       {
         "type":"Feature", "properties": {
             "throughput": 5.0,
@@ -46,7 +47,7 @@ datafeed_callback( {
         }
         , "id":"data1"
       },
-
+      // ----------------------------------
       {
         "type":"Feature", "properties": {
             "throughput": 2.0,
@@ -57,6 +58,18 @@ datafeed_callback( {
             "type": "Point", "coordinates": [-84.489630, 42.704596] // [longitude, latitude]
         }
         , "id":"data2"
+      },
+      // ----------------------------------
+      {
+        "type":"Feature", "properties": {
+            "throughput": 0.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.4784421, 42.7046888] // [longitude, latitude]
+        }
+        , "id":"data3"
       },
 
 
