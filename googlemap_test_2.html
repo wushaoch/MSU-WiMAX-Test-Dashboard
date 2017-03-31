@@ -1,6 +1,14 @@
 <!DOCTYPE html> <!-- AIzaSyA280mKYR5fY3P-YjwniDKGPX2EO4BuNGg -->
 <html>
   <head>
+    <!-- Bootstrap CDN -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Customized Style -->
+    <!-- insert css link here -->
+    <!-- title -->
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -15,18 +23,81 @@
       }
       #legend {
         font-family: Arial, sans-serif;
-        background: #fff;
-        padding: 5px;
-        margin: 5px;
+        background: #EEE;
+        padding: 4px;
+        margin: 0;
         border: 2px solid #000;
+        height: 40%;
+        opacity: 0.8;
+        transition: opacity .3s ease;
+        border-radius: 4px;
+        margin-left: 10px;
       }
+      #legend:hover {
+        opacity: 1;
+      }
+      #legend_header h5 {
+        margin: 0 0 7% 0;
+        padding: 0;
+      }
+      #legend_body {
+        height: 90%;
+        margin: 0;
+      }
+        #legend_body_left, #legend_body_right {
+          text-align: right;
+          height: 100%;
+          margin: auto;
+          padding: 0;
+        }
+
+        #legend_body_left {
+          flex: 1;
+        }
+
+        #legend_gradient_map {
+          height: 100%;
+          width: 30%;
+          margin: auto;
+          background: -moz-linear-gradient(top, #1FF8FF 30%, #ff0000 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, #1FF8FF 30%,#ff0000 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, #1FF8FF 30%,#ff0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          border-radius: 5px;
+        }
+      #legend_footer {
+        margin: auto;
+        margin-top: 5%;
+        text-align: center;
+      }
+
+      .test {
+        flex-direction: y;
+      }
+
     </style>
   </head>
   <body>
     <div id="map"></div>
     <div id="legend">
-      <h2>Throughput</h2>
-      <p>Hello Tharo</p>
+      <div class="row">
+        <div class="col-xs-12" id="legend_header">
+          <h5>Throughput</h5>
+        </div>
+      </div>
+      <div class="row" id="legend_body">
+        <div class="col-xs-6" id="legend_body_left">
+          <p class="test">300.0</p><br><br><br><br><br><br><br>
+          <p class="test">200.0</p><br><br><br><br><br><br><br>
+          <p class="test">100.0</p><br><br><br><br><br><br><br>
+          <p class="test">0.0  </p>
+        </div>
+        <div class="col-xs-6" id="legend_body_right">
+          <div id="legend_gradient_map"></div>
+        </div>
+      </div>
+      <div class="row" id="legend_footer">
+        <p> (in Mbps) </p>
+      </div>
     </div>
     <script>
       var map;
@@ -42,7 +113,7 @@
               position: google.maps.ControlPosition.LEFT_TOP
           },
           center: {lat: 42.725166, lng: -84.481115},
-          mapTypeId: 'terrain',
+          mapTypeId: 'hybrid',
           fullscreenControl: true,
           rotateControl: true,
         });
@@ -53,27 +124,27 @@
         var icons = {
           parking: {
             name: 'Parking',
-            icon: iconBase + 'parking_lot_maps.png'
+            // icon: iconBase + 'parking_lot_maps.png'
           },
           library: {
             name: 'Library',
-            icon: iconBase + 'library_maps.png'
+            // icon: iconBase + 'library_maps.png'
           },
           info: {
             name: 'Info',
-            icon: iconBase + 'info-i_maps.png'
+            // icon: iconBase + 'info-i_maps.png'
           }
         };
 
-        var legend = document.getElementById('legend');
-        for (var key in icons) {
-          var type = icons[key];
-          var name = type.name;
-          var icon = type.icon;
-          var div = document.createElement('div');
-          div.innerHTML = '<img src="' + icon + '"> ' + name;
-          legend.appendChild(div);
-        }
+        // var legend = document.getElementById('legend');
+        // for (var key in icons) {
+        //   var type = icons[key];
+        //   var name = type.name;
+        //   var icon = type.icon;
+        //   var div = document.createElement('div');
+        //   div.innerHTML = '<img src="' + icon + '"> ' + name;
+        //   legend.appendChild(div);
+        // }
 
         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(legend);
 
@@ -92,15 +163,54 @@
       }
 
       function getCircle(throughput) {
+        var color = getCircleColor(throughput / 10 * 100);
         return {
           path: google.maps.SymbolPath.CIRCLE,
-          fillColor: 'green', // need to calculate color according to strength
-          fillOpacity: 0.75,
-          scale: 7,
+          fillColor: color, // need to calculate color according to strength
+          fillOpacity: 1,
+          scale: 8,
           strokeColor: 'white',
-          strokeWeight: .5,
-          strokeOpacity: 0,
+          strokeWeight: 1.5,
+          strokeOpacity: 1,
         };
+      }
+
+      function getCircleColor(mag) {
+        // intensity on a scale range from 0 to 100
+        
+        var top_r = 31;  //#1FF8FF
+        var top_g = 248;
+        var top_b = 255;
+        var btm_r = 255;
+        var btm_g = 0;
+        var btm_b = 0;
+
+        // color only starts to change at 70% height of the bar
+        if (mag >= 70)
+        {
+          return "#1FF8FF";
+        }
+        else
+        {
+          var r = Math.round(btm_r + (mag * (top_r - btm_r)) / 70);
+          var g = Math.round(btm_g + (mag * (top_g - btm_g)) / 70);
+          var b = Math.round(btm_b + (mag * (top_b - btm_b)) / 70); 
+          console.log(RgbDecToHex(r, g, b));
+          return RgbDecToHex(r, g, b);
+        } 
+      }
+
+      function RgbDecToHex(r_d, g_d, b_d) {
+        // convert to hex strings
+        r = r_d.toString(16);
+        g = g_d.toString(16);
+        b = b_d.toString(16);
+        // pad zeroes if necessary
+        if (r_d < 16) { r = "0" + r; }
+        if (g_d < 16) { g = "0" + g; }
+        if (b_d < 16) { b = "0" + b; }
+
+        return ("#" + r + g + b);
       }
 
       function datafeed_callback(results) {
