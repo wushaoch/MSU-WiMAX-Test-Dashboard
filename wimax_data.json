@@ -13,7 +13,7 @@ datafeed_callback( {
       // insert entries
       {
         "type":"Feature", "properties": {
-            "mag": 7.1,
+            "throughput": 7.0,
             "magType": "mb", 
             "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
         }
@@ -21,7 +21,21 @@ datafeed_callback( {
             "type": "Point", "coordinates": [-84.481115, 42.725166] // [longitude, latitude]
         }
         , "id":"us20008u42"
-      }
+      },
+
+      {
+        "type":"Feature", "properties": {
+            "throughput": 10.0,
+            "magType": "mb", 
+            "title": "M 4.1 - 112km SW of San Pedro de Atacama, Chile"
+        }
+        , "geometry": {
+            "type": "Point", "coordinates": [-84.484660, 42.717682] // [longitude, latitude]
+        }
+        , "id":"BSU"
+      },
+
+
 
 
 
