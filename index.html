@@ -7,74 +7,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Customized Style -->
-    <!-- insert css link here -->
-    <!-- title -->
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #legend {
-        font-family: Arial, sans-serif;
-        background: #EEE;
-        padding: 4px;
-        margin: 0;
-        border: 2px solid #000;
-        height: 40%;
-        opacity: 1;
-        transition: opacity .3s ease;
-        border-radius: 4px;
-        margin-left: 10px;
-      }
-      #legend:hover {
-        opacity: 1;
-      }
-      #legend_header h5 {
-        margin: 0 0 7% 0;
-        padding: 0;
-      }
-      #legend_body {
-        height: 90%;
-        margin: 0;
-      }
-        #legend_body_left, #legend_body_right {
-          text-align: right;
-          height: 100%;
-          margin: auto;
-          padding: 0;
-        }
-
-        #legend_body_left {
-          flex: 1;
-        }
-
-        #legend_gradient_map {
-          height: 100%;
-          width: 30%;
-          margin: auto;
-          background: -moz-linear-gradient(top, #1FF8FF 30%, #ff0000 100%); /* FF3.6-15 */
-          background: -webkit-linear-gradient(top, #1FF8FF 30%,#ff0000 100%); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(to bottom, #1FF8FF 30%,#ff0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          border-radius: 5px;
-        }
-      #legend_footer {
-        margin: auto;
-        margin-top: 5%;
-        text-align: center;
-      }
-
-      .test {
-        flex-direction: y;
-      }
-
-    </style>
+    <link rel="stylesheet" href="assets/styles.css">
   </head>
   <body>
     <div id="map"></div>
@@ -125,7 +58,7 @@
         // Create a <script> tag and the source.
         var script = document.createElement('script');
 
-        script.src = 'wimax_data.json';
+        script.src = 'data/wimax_data.json';
         document.getElementsByTagName('head')[0].appendChild(script);
 
         map.data.setStyle(function(feature) {
