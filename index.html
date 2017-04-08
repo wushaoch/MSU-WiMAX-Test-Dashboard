@@ -7,24 +7,18 @@
   <body>
     <div id="map"></div>
     <div id="legend">
-      <div class="row">
-        <div class="col-xs-12" id="legend_header">
-          <h5>Throughput</h5>
-        </div>
-      </div>
-      <div class="row" id="legend_body">
-        <div class="col-xs-6" id="legend_body_left">
-          <p class="test">300.0</p><br><br><br><br><br><br><br>
-          <p class="test">200.0</p><br><br><br><br><br><br><br>
-          <p class="test">100.0</p><br><br><br><br><br><br><br>
-          <p class="test">0.0  </p>
-        </div>
-        <div class="col-xs-6" id="legend_body_right">
+      <div id="legend_body">
+        <div id="legend_body_left">
           <div id="legend_gradient_map"></div>
         </div>
+        <div id="legend_body_right">
+          <p>100%</p>
+          <p>67%</p>
+          <p>33%</p>
+        </div>
       </div>
-      <div class="row" id="legend_footer">
-        <p> (in Mbps) </p>
+      <div id="legend_footer">
+        <p id="legend_unit"> Mbps </p>
       </div>
     </div>
 

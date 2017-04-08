@@ -4,12 +4,19 @@
   height: 100%;
 }
 /* Optional: Makes the sample page fill the window. */
+p {
+  color: #000;
+}
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
 #legend {
+  min-width: 35px;
+  max-width: 56px;
   font-family: Arial, sans-serif;
   background: #EEE;
   padding: 4px;
@@ -19,43 +26,69 @@ html, body {
   opacity: 1;
   transition: opacity .3s ease;
   border-radius: 4px;
-  margin-left: 10px;
+  margin-left: 6px;
 }
 #legend:hover {
-  opacity: 1;
+  opacity: 0.3;
 }
 #legend_header h5 {
   margin: 0 0 7% 0;
   padding: 0;
 }
 #legend_body {
-  height: 90%;
+  height: 95%;
   margin: 0;
 }
   #legend_body_left, #legend_body_right {
     text-align: right;
     height: 100%;
-    margin: auto;
+    
+    margin: 0;
     padding: 0;
   }
 
   #legend_body_left {
+    float: left;
+    width: 40%;
+  }
+
+  #legend_body_right {
+    float: right;
+    width: 60%;
+    align-content: space-between;
+  }
+
+  #legend_body_right p {
+    height: 33.3%;
+    margin: 0;
+  }
+
+  #legend_body_right span {
+
+    margin: 0;
+    -webkit-flex: 1;  /* Safari 6.1+ */
+    -ms-flex: 1;  /* IE 10 */    
     flex: 1;
   }
 
   #legend_gradient_map {
     height: 100%;
-    width: 30%;
+    width: 45%;
     margin: auto;
     background: -moz-linear-gradient(top, #1FF8FF 30%, #ff0000 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #1FF8FF 30%,#ff0000 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #1FF8FF 30%,#ff0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     border-radius: 5px;
+    box-shadow: 0px 0px 3px #888888;
   }
 #legend_footer {
   margin: auto;
-  margin-top: 5%;
   text-align: center;
+}
+
+#legend_unit {
+  margin: 0;
+  margin-top: 2px;
 }
 
 .test {
