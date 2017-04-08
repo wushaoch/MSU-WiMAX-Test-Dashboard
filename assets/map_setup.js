@@ -11,6 +11,7 @@ function initMap() {
         position: google.maps.ControlPosition.LEFT_TOP
     },
     center: {lat: 42.725166, lng: -84.481115},
+    // center: {lat: -25.363, lng: 131.044}, // test for window
     mapTypeId: 'hybrid',
     fullscreenControl: true,
     rotateControl: true,
@@ -20,6 +21,10 @@ function initMap() {
   var legend = document.getElementById('legend');
   map.controls[google.maps.ControlPosition.LEFT_CENTER].push(legend);
 
+  // detail window
+  var detail_box = document.getElementById('detail_box');
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(detail_box);
+
   // Create a <script> tag and the source.
   var script = document.createElement('script');
 
@@ -27,15 +32,32 @@ function initMap() {
   document.getElementsByTagName('head')[0].appendChild(script);
 
   map.data.setStyle(function(feature) {
-    var throughput = feature.getProperty('throughput');
+    var mag = feature.getProperty('throughput');
     return {
-      icon: getCircle(throughput)
+      icon: getCircle(mag)
     };
+  });
+  
+
+  map.data.addListener('click', function(event) {
+    document.getElementById("db_header_text").innerHTML="Data Point #?";
+    document.getElementById("db_value_1").innerHTML=event.feature.getProperty('throughput');
+    document.getElementById("db_value_2").innerHTML=event.feature.getProperty('throughput');
+    document.getElementById("db_value_3").innerHTML=event.feature.getProperty('throughput');
+  });
+
+  map.data.addListener('mouseover', function(event) {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {icon: getCircle(0)});
+  });
+
+  map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
   });
 }
 
 function getCircle(throughput) {
-  var color = getCircleColor(throughput / 10 * 100);
+  var color = getColor(throughput / 10 * 100);
   return {
     path: google.maps.SymbolPath.CIRCLE,
     fillColor: color, // need to calculate color according to strength
@@ -47,7 +69,7 @@ function getCircle(throughput) {
   };
 }
 
-function getCircleColor(mag) {
+function getColor(mag) {
   // intensity on a scale range from 0 to 100
   
   var top_r = 31;  //#1FF8FF
@@ -67,7 +89,6 @@ function getCircleColor(mag) {
     var r = Math.round(btm_r + (mag * (top_r - btm_r)) / 70);
     var g = Math.round(btm_g + (mag * (top_g - btm_g)) / 70);
     var b = Math.round(btm_b + (mag * (top_b - btm_b)) / 70); 
-    console.log(RgbDecToHex(r, g, b));
     return RgbDecToHex(r, g, b);
   } 
 }
