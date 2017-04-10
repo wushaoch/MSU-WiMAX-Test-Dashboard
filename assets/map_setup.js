@@ -8,7 +8,7 @@ function initMap() {
     },
     treetViewControl: true,
     streetViewControlOptions: {
-        position: google.maps.ControlPosition.LEFT_TOP
+        position: google.maps.ControlPosition.RIGHT_BOTTOM
     },
     center: {lat: 42.725166, lng: -84.481115},
     // center: {lat: -25.363, lng: 131.044}, // test for window
@@ -19,11 +19,11 @@ function initMap() {
 
   // legend
   var legend = document.getElementById('legend');
-  map.controls[google.maps.ControlPosition.LEFT_CENTER].push(legend);
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
   // detail window
   var detail_box = document.getElementById('detail_box');
-  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(detail_box);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(detail_box);
 
   // Create a <script> tag and the source.
   var script = document.createElement('script');
