@@ -6,7 +6,7 @@ function initMap() {
     zoomControlOptions: {
       position: google.maps.ControlPosition.RIGHT_TOP
     },
-    treetViewControl: true,
+    streetViewControl: true,
     streetViewControlOptions: {
         position: google.maps.ControlPosition.RIGHT_BOTTOM
     },
