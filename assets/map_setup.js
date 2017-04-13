@@ -28,11 +28,11 @@ function initMap() {
   // Create a <script> tag and the source.
   var script = document.createElement('script');
 
-  script.src = 'data/wimax_data.json';
+  script.src = 'convert/master.json';
   document.getElementsByTagName('head')[0].appendChild(script);
 
   map.data.setStyle(function(feature) {
-    var mag = feature.getProperty('throughput');
+    var mag = feature.getProperty('received_throughput');
     return {
       icon: getCircle(mag)
     };
