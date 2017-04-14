@@ -128,7 +128,8 @@ function initMap() {
                            + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
                            + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
                            + "SU SNR: <b>" + su_snr + "</b> dB<br>"
-                           + pos + "<br>";
+                           + pos + "<br>"
+                           // + "<img class='case-photo' src='photos/20170410_190659.jpg'/>";
         }
 
         
