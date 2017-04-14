@@ -17,6 +17,42 @@ function initMap() {
         rotateControl: true,
     });
 
+    // geolocation
+
+    var infoWindow;
+
+    infoWindow = new google.maps.InfoWindow;
+
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Current Location');
+        infoWindow.open(map);
+        // map.setCenter(pos); // center the map to current location
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+
+
+
     // legend
     var legend = document.getElementById('legend');
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
@@ -33,18 +69,7 @@ function initMap() {
 
 
     var base_station = {lat: 42.7176737, lng: -84.48485924};
-
     var base_station_image = "assets/triangle.png";
-
-    // var goldStar = {
-    //       path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-    //       fillColor: 'yellow',
-    //       fillOpacity: 0.8,
-    //       scale: 1,
-    //       strokeColor: 'gold',
-    //       strokeWeight: 2
-    //     };
-
 
     var marker = new google.maps.Marker({
         position: base_station,
@@ -52,10 +77,10 @@ function initMap() {
         icon: base_station_image,
     });
 
-
+    // 90 degree white border lines
 
     var borderLinesCoordinates = [ 
-        {lat: 42.686397, lng: -84.52909124}, // left point : 42.692970, -84.515050
+        {lat: 42.686397,  lng: -84.52909124}, // left point : 42.692970, -84.515050
         {lat: 42.7176737, lng: -84.48485924}, // base station
         {lat: 42.686397,  lng: -84.44062724} // right point: 42.690573, -84.456670
     ];
@@ -70,33 +95,28 @@ function initMap() {
 
     borderLines.setMap(map);
 
-    map.data.setStyle(function(feature) {
-        var mag_normalized = normalizeMag(
-                                    feature.getProperty('sent_throughput'),
-                                    100,
-                                    0
-                                    );
-        return {
-            icon: getCircle(mag_normalized)
-        };
-    });
     
+    // update detail box (which is on top left)
 
     map.data.addListener('click', function(event) {
+       
         document.getElementById("db_header_text").innerHTML="Details";
-        
+        document.getElementById("detail_box").style.display = "inline";
+        // document.getElementById("timestamp").innerHTML=event.feature.getProperty('time');
+        // document.getElementById("coord").innerHTML=event.coords.latitude;
+
         var receive_thp = event.feature.getProperty('received_throughput');
 
         if (receive_thp == 999)
         {
-            document.getElementById("receive_value").innerHTML= "0";
-            document.getElementById("send_value").innerHTML= "0";
-            document.getElementById("db_value_3").innerHTML= "0";
-            document.getElementById("db_value_4").innerHTML= "0";
-            document.getElementById("db_value_5").innerHTML= "0";
-            document.getElementById("db_value_6").innerHTML= "0";
+            document.getElementById("receive_thp").innerHTML= "0";
+            document.getElementById("send_thp").innerHTML= "0";
+            document.getElementById("bsu_sig").innerHTML= "0";
+            document.getElementById("su_sig").innerHTML= "0";
+            document.getElementById("bsu_snr").innerHTML= "0";
+            document.getElementById("su_snr").innerHTML= "0";
             document.getElementById("detail_box").style.display = "0";
-            document.getElementById("timestamp").innerHTML=event.feature.getProperty('time');
+            
         }
 
         else 
@@ -107,15 +127,31 @@ function initMap() {
             document.getElementById("su_sig").innerHTML=event.feature.getProperty('subscriber_unit_signal_strength');
             document.getElementById("bsu_snr").innerHTML=event.feature.getProperty('base_station_SNR');
             document.getElementById("su_snr").innerHTML=event.feature.getProperty('subscriber_unit_SNR');
-            document.getElementById("timestamp").innerHTML=event.feature.getProperty('time');
         }
-        document.getElementById("detail_box").style.display = "inline";
-        
     });
 
+    // create circles for data points
+    map.data.setStyle(function(feature) {
+        var mag_normalized = normalizeMag(
+                            feature.getProperty('sent_throughput'),
+                            100,
+                            0
+                            );
+        return {
+            icon: getCircle(mag_normalized)
+        };
+    });
+
+    // circle becomes bigger and bolder when mouse hover over
     map.data.addListener('mouseover', function(event) {
         map.data.revertStyle();
-        map.data.overrideStyle(event.feature, {icon: getCircle(-2)});
+        // map.data.overrideStyle();
+        var mag_normalized = normalizeMag(
+                            event.feature.getProperty('sent_throughput'),
+                            100,
+                            0
+                            );
+        map.data.overrideStyle(event.feature, {icon: getCircle(mag_normalized, 11, 3)});
     });
 
     map.data.addListener('mouseout', function(event) {
@@ -123,15 +159,15 @@ function initMap() {
     });
 }
 
-function getCircle(mag_normalized) {
+function getCircle(mag_normalized, circle_scale=8, stroke=2) {
     var color = getColor(mag_normalized);
     return {
         path: google.maps.SymbolPath.CIRCLE,
-        fillColor: color, // need to calculate color according to strength
+        fillColor: color,
         fillOpacity: 1,
-        scale: 8,
+        scale: circle_scale,
         strokeColor: 'black',
-        strokeWeight: 2,
+        strokeWeight: stroke,
         strokeOpacity: 1,
     };
 }
@@ -158,11 +194,6 @@ function getColor(mag) {
         return "#FFFFFF";
     }
 
-    // // light blue #1FF8FF
-    // var top_r = 31;  
-    // var top_g = 248;
-    // var top_b = 255;
-
     // 00ff61
     var top_r = 0;  
     var top_g = 255;
@@ -179,10 +210,7 @@ function getColor(mag) {
     var btm_r = 255;
     var btm_g = 144;
     var btm_b = 0;    
-    // red 
-    // var btm_r = 255;
-    // var btm_g = 0;
-    // var btm_b = 0;
+
 
     // color only starts to change at 90% height of the bar
     if (mag >= 75 && mag < 100)
