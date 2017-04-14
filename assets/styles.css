@@ -18,7 +18,7 @@ html, body {
   min-width: 35px;
   max-width: 56px;
   font-family: Arial, sans-serif;
-  background: #EEE;
+  background: #FFF;
   padding: 4px;
   margin: 0;
   border: 2px solid #000;
@@ -98,11 +98,12 @@ html, body {
   width: 100px;
   /*max-width: 20%;*/
   font-family: Arial, sans-serif;
-  background: #EEE;
+  background: #FFF;
   padding: 4px;
   margin: 0;
   margin-left: 6px;
   border: 2px solid #000;
+  transition: opacity 1s;
 }
 
 #detail_box h3 {

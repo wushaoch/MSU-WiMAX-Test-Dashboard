@@ -10,9 +10,10 @@ function initMap() {
         streetViewControlOptions: {
                 position: google.maps.ControlPosition.RIGHT_BOTTOM
         },
-        center: {lat: 42.707554, lng: -84.4656752}, // 42.707554,-84.4656752
+        center: {lat: 42.712063, lng: -84.478318}, // 42.712063, -84.478318
         // center: {lat: -25.363, lng: 131.044}, // test for window
         mapTypeId: 'hybrid',
+        mapTypeControl: true,
         fullscreenControl: true,
         rotateControl: true,
     });
@@ -32,7 +33,7 @@ function initMap() {
         };
 
         infoWindow.setPosition(pos);
-        infoWindow.setContent('Current Location');
+        infoWindow.setContent('You Are Here');
         infoWindow.open(map);
         // map.setCenter(pos); // center the map to current location
         }, function() {
@@ -95,39 +96,48 @@ function initMap() {
 
     borderLines.setMap(map);
 
-    
+    // dim the legend when dragging
+
+    map.data.addListener('drag', function(event) {
+        document.getElementById("legend").style.opacity = "0";
+    });
+
     // update detail box (which is on top left)
 
     map.data.addListener('click', function(event) {
-       
-        document.getElementById("db_header_text").innerHTML="Details";
-        document.getElementById("detail_box").style.display = "inline";
-        // document.getElementById("timestamp").innerHTML=event.feature.getProperty('time');
-        // document.getElementById("coord").innerHTML=event.coords.latitude;
 
+        
         var receive_thp = event.feature.getProperty('received_throughput');
+        var send_thp    = event.feature.getProperty('sent_throughput');
+        var bsu_sig     = event.feature.getProperty('base_station_signal_strength');
+        var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
+        var bsu_snr     = event.feature.getProperty('base_station_SNR');
+        var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
+        var pos         = event.feature.getGeometry().get();
+        
+        var window_content;
 
         if (receive_thp == 999)
         {
-            document.getElementById("receive_thp").innerHTML= "0";
-            document.getElementById("send_thp").innerHTML= "0";
-            document.getElementById("bsu_sig").innerHTML= "0";
-            document.getElementById("su_sig").innerHTML= "0";
-            document.getElementById("bsu_snr").innerHTML= "0";
-            document.getElementById("su_snr").innerHTML= "0";
-            document.getElementById("detail_box").style.display = "0";
-            
+            window_content = "No successful connection";
+        } 
+        else {
+            var window_content = 
+                             "Received Throughput: <b>" + receive_thp + "</b> Mbps<br>"
+                           + "Sent Throughput: <b>" + send_thp + "</b> Mbps<br>"
+                           + "BSU Signal: <b>" + bsu_sig + "</b> dBm<br>"
+                           + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
+                           + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
+                           + "SU SNR: <b>" + su_snr + "</b> dB<br>"
+                           + pos + "<br>";
         }
 
-        else 
-        {
-            document.getElementById("receive_thp").innerHTML=event.feature.getProperty('received_throughput');
-            document.getElementById("send_thp").innerHTML=event.feature.getProperty('sent_throughput');
-            document.getElementById("bsu_sig").innerHTML=event.feature.getProperty('base_station_signal_strength');
-            document.getElementById("su_sig").innerHTML=event.feature.getProperty('subscriber_unit_signal_strength');
-            document.getElementById("bsu_snr").innerHTML=event.feature.getProperty('base_station_SNR');
-            document.getElementById("su_snr").innerHTML=event.feature.getProperty('subscriber_unit_SNR');
-        }
+        
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(window_content);
+        infoWindow.open(map);
+        map.panTo(pos);
+        // map.setZoom(16);
     });
 
     // create circles for data points
