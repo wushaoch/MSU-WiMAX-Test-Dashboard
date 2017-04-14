@@ -12,9 +12,10 @@
           <div id="legend_gradient_map"></div>
         </div>
         <div id="legend_body_right">
-          <p>100%</p>
-          <p>67%</p>
-          <p>33%</p>
+          <p>100</p>
+          <p>75.0</p>
+          <p>50.0</p>
+          <p>25.0</p>
         </div>
       </div>
       <div id="legend_footer">
@@ -23,15 +24,16 @@
     </div>
     <div id="detail_box">
       <div id="detail_box_header">
-        <h3 id="db_header_text">Click To Show Detail</h3>
+        <h3 id="db_header_text"></h3>
       </div>
       <div id="detail_box_body">
-          <p>Receive: <span id="receive_value"></span> Mbps</p>
-          <p>Send:    <span id="send_value"></span> Mbps</p>
-          <p>BSU Sig: <span id="db_value_3"></span> dBm</p>
-          <p>SU Sig:  <span id="db_value_4"></span> dBm</p>
-          <p>BSU SNR: <span id="db_value_5"></span> dB</p>
-          <p>SU SNR:  <span id="db_value_6"></span> dB</p>
+          <p>Receive: <b><span id="receive_thp"></span></b> Mbps</p>
+          <p>Send:    <b><span id="send_thp"></span></b> Mbps</p>
+          <p>BSU Sig: <b><span id="bsu_sig"></span></b> dBm</p>
+          <p>SU Sig:  <b><span id="su_sig"></span></b> dBm</p>
+          <p>BSU SNR: <b><span id="bsu_snr"></span></b> dB</p>
+          <p>SU SNR:  <b><span id="su_snr"></span></b> dB</p>
+          <p>Date:    <b><span id="timestamp"></span></b></p>
           <p> <span id="detail_box_close_btn" onclick="close_detail_box();">[x]close</span> </p>
       </div>
     </div>
@@ -39,7 +41,7 @@
 
     <script src="assets/map_setup.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA280mKYR5fY3P-YjwniDKGPX2EO4BuNGg&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFKN2J3nWNrEtJ3D9hD8HoRuxmpM0V-Ak&callback=initMap">
     </script>
   </body>
 </html>
