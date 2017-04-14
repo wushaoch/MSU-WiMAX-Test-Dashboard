@@ -24,7 +24,6 @@ function initMap() {
 
     infoWindow = new google.maps.InfoWindow;
 
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
