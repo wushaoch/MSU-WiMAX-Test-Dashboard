@@ -1,6 +1,7 @@
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
+        scaleControl: true,
         zoom: 14,
         zoomControl: true,
         zoomControlOptions: {
@@ -15,6 +16,9 @@ function initMap() {
         mapTypeId: 'hybrid',
         mapTypeControl: true,
         fullscreenControl: true,
+        fullscreenControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_TOP
+        },
         rotateControl: true,
     });
 
@@ -67,11 +71,19 @@ function initMap() {
     script.src = 'convert/master.json';
     document.getElementsByTagName('head')[0].appendChild(script);
 
+    // // attempt to make heatmap
+    // var heatmap = new google.maps.visualization.HeatmapLayer({
+    //     data: map.
+        
+    // });
+
+    // heatmap.setMap(map);
+
 
     var base_station = {lat: 42.7176737, lng: -84.48485924};
     var base_station_image = "assets/triangle.png";
 
-    var marker = new google.maps.Marker({
+    var base_station_marker = new google.maps.Marker({
         position: base_station,
         map: map,
         icon: base_station_image,
@@ -118,7 +130,7 @@ function initMap() {
 
         if (receive_thp == 999)
         {
-            window_content = "No successful connection";
+            window_content = "No successful connection<br>" + pos + "<br>";
         } 
         else {
             var window_content = 
