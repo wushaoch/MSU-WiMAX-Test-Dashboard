@@ -119,39 +119,35 @@ function initMap() {
 
         
         var receive_thp = event.feature.getProperty('received_throughput');
-        var send_thp    = event.feature.getProperty('sent_throughput');
-        var bsu_sig     = event.feature.getProperty('base_station_signal_strength');
-        var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
-        var bsu_snr     = event.feature.getProperty('base_station_SNR');
-        var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
         var time        = event.feature.getProperty('time');
         var pos         = event.feature.getGeometry().get();
-        
         var window_content;
 
         if (receive_thp == 999)
         {
-            window_content = "No successful connection<br>" + pos + "<br>";
+            window_content = "No successful connection<br>";
         } 
         else {
+            var send_thp    = event.feature.getProperty('sent_throughput');
+            var bsu_sig     = event.feature.getProperty('base_station_signal_strength');
+            var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
+            var bsu_snr     = event.feature.getProperty('base_station_SNR');
+            var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
             var window_content = 
                              "Received Throughput: <b>" + receive_thp + "</b> Mbps<br>"
                            + "Sent Throughput: <b>" + send_thp + "</b> Mbps<br>"
                            + "BSU Signal: <b>" + bsu_sig + "</b> dBm<br>"
                            + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
                            + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
-                           + "SU SNR: <b>" + su_snr + "</b> dB<br>"
-                           + pos + "<br>"
-                           + "Time: " + time + "<br>"
-                           // + "<img class='case-photo' src='photos/20170410_190659.jpg'/>";
+                           + "SU SNR: <b>" + su_snr + "</b> dB<br>";
         }
 
-        
+        window_content = window_content + pos + "<br>" + "Time: " + time + "<br>";
+
         infoWindow.setPosition(pos);
         infoWindow.setContent(window_content);
         infoWindow.open(map);
         map.panTo(pos);
-        // map.setZoom(16);
     });
 
     // create circles for data points
@@ -183,7 +179,7 @@ function initMap() {
     });
 }
 
-function getCircle(mag_normalized, circle_scale=8, stroke=2) {
+function getCircle(mag_normalized, circle_scale=7, stroke=2) {
     var color = getColor(mag_normalized);
     return {
         path: google.maps.SymbolPath.CIRCLE,
