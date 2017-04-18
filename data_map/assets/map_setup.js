@@ -124,6 +124,7 @@ function initMap() {
         var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
         var bsu_snr     = event.feature.getProperty('base_station_SNR');
         var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
+        var time        = event.feature.getProperty('time');
         var pos         = event.feature.getGeometry().get();
         
         var window_content;
@@ -141,6 +142,7 @@ function initMap() {
                            + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
                            + "SU SNR: <b>" + su_snr + "</b> dB<br>"
                            + pos + "<br>"
+                           + "Time: " + time + "<br>"
                            // + "<img class='case-photo' src='photos/20170410_190659.jpg'/>";
         }
 

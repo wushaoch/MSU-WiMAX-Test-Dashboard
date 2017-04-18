@@ -49,6 +49,8 @@ def write_geojson_file(filename, data, rows, title_data):
                     properties[keys[row]] = int(line[row])
                 else:
                     properties[keys[row]] = float(line[row])
+            properties["id"] = int(line[9]) #timestamp
+            properties["time"] = convert_to_datetime(line[9])
             entry["properties"] = properties
             geometry = OrderedDict()
             geometry["type"] = "Point"
@@ -57,8 +59,6 @@ def write_geojson_file(filename, data, rows, title_data):
             coordinates.append(float(line[1])) #latitude
             geometry["coordinates"] = coordinates
             entry["geometry"] = geometry
-            entry["id"] = int(line[9]) #timestamp
-            entry["time"] = convert_to_datetime(line[9])
             jfilecontents.append(entry)
         title_data["features"]=jfilecontents
         title_data["bbox"] = [-179.6897, -60.5845, 0, 179.8707, 69.6244, 556.1]
