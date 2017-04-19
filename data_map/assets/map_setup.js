@@ -6,6 +6,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         scaleControl: true,
         zoom: 14,
+        minZoom: 14,
         zoomControl: true,
         zoomControlOptions: {
             position: google.maps.ControlPosition.RIGHT_TOP
@@ -14,7 +15,7 @@ function initMap() {
         streetViewControlOptions: {
             position: google.maps.ControlPosition.RIGHT_BOTTOM
         },
-        center: {lat: 42.712063, lng: -84.478318}, // 42.712063, -84.478318
+        center: {lat: 42.70444651, lng: -84.48442291000003}, // 42.70444651, -84.48442291000003
         // center: {lat: -25.363, lng: 131.044}, // test for window
         mapTypeId: 'hybrid',
         mapTypeControl: true,
@@ -24,7 +25,6 @@ function initMap() {
         },
         rotateControl: true,
     });
-
 
     // geolocation
     var infoWindow;
@@ -221,8 +221,16 @@ function initMap() {
                             100,
                             0
                             );
+        if (doesPhotoIDExist(feature.getProperty('id')) == true)
+        {
+            var stroke_color_value = "#fff";
+        }
+        else
+        {
+            var stroke_color_value = "black";
+        }
         return {
-            icon: getCircle(mag_normalized)
+            icon: getCircle(mag_normalized, 7, 2, 0.8, stroke_color_value)
         };
     });
 
@@ -235,22 +243,50 @@ function initMap() {
                             100,
                             0
                             );
-        map.data.overrideStyle(event.feature, {icon: getCircle(mag_normalized, 11, 3, 1)});
+        if (doesPhotoIDExist(event.feature.getProperty('id')) == true)
+        {
+            var stroke_color_value = "#fff";
+        }
+        else
+        {
+            var stroke_color_value = "black";
+        }
+        map.data.overrideStyle(event.feature, {icon: getCircle(mag_normalized, 11, 3, 1, stroke_color_value)});
     });
 
     map.data.addListener('mouseout', function(event) {
         map.data.revertStyle();
     });
+
 }
 
-function getCircle(mag_normalized, circle_scale=7, stroke=2, opacity=0.8) {
+// // zoom limit
+
+// google.maps.event.addListener(map, 'zoom_changed', function() {
+//     zoomChangeBoundsListener = 
+//         google.maps.event.addListener(map, 'bounds_changed', function(event) {
+//             if (this.getZoom() < 14 && this.initialZoom == true) {
+//                 // Change max/min zoom here
+//                 this.setZoom(14);
+//                 this.initialZoom = false;
+//             }
+//         google.maps.event.removeListener(zoomChangeBoundsListener);
+//     });
+// });
+// map.initialZoom = true;
+// map.fitBounds(bounds);
+
+
+// data circles
+
+function getCircle(mag_normalized, circle_scale=7, stroke=2, opacity=0.8, stroke_color='black') {
     var color = getColor(mag_normalized);
     return {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: color,
         fillOpacity: opacity,
         scale: circle_scale,
-        strokeColor: 'black',
+        strokeColor: stroke_color,
         strokeWeight: stroke,
         strokeOpacity: 1,
     };
