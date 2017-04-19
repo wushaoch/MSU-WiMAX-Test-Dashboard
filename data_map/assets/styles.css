@@ -101,6 +101,21 @@ html, body {
   font-size: 1.2em;
 }
 
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 
 /*style info window
 
@@ -117,15 +132,6 @@ html, body {
 } 
 */
 
-
-#detail_box_close_btn {
-  text-align: center;
-}
-
-#detail_box_close_btn:hover {
-  color: #FF0000;
-  cursor: pointer;
-}
 
 #info_window_header {
   text-align: center;

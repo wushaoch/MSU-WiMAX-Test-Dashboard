@@ -186,6 +186,11 @@ function initMap() {
             var modal_content = document.getElementById('modal_content');
             var btn = document.getElementById("info_window_header");
 
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
             // add underline to those who have photo
             var info_window_header = document.getElementById('info_window_header');
             info_window_header.setAttribute("class", "underline");
