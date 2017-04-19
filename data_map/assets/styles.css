@@ -15,17 +15,18 @@ html, body {
 }
 
 #legend {
-  min-width: 35px;
+  min-width: 40px;
   max-width: 56px;
   font-family: Arial, sans-serif;
-  background: #FFF;
+  /*background: #111;*/
+  background: rgba(0, 0, 0, 0.5);
   padding: 4px;
   margin: 0;
-  border: 2px solid #000;
-  height: 40%;
+  /*border: 1px solid #FFF;*/
+  height: 60%;
   opacity: 1;
   transition: opacity .3s ease;
-  border-radius: 4px;
+  border-radius: 3px;
   margin-left: 6px;
 }
 #legend:hover {
@@ -50,17 +51,22 @@ html, body {
   #legend_body_left {
     float: left;
     width: 40%;
+    margin-left: -2px;
   }
 
   #legend_body_right {
     float: right;
     width: 60%;
     align-content: space-between;
+    margin-left: -2px;
   }
 
   #legend_body_right p {
     height: 25%;
     margin: 0;
+    color: #FFF;
+    text-shadow: 0px 0px 3px #000; 0px 0px 3px #000;
+    font-size: 1.2em;
   }
 
   #legend_body_right span {
@@ -75,11 +81,11 @@ html, body {
     height: 100%;
     width: 45%;
     margin: auto;
-    background: -moz-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    border-radius: 5px;
-    box-shadow: 0px 0px 3px #888888;
+    background: -moz-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border-radius: 2px;
+    box-shadow: 0px 0px 3px #000;
   }
 #legend_footer {
   margin: auto;
@@ -88,7 +94,11 @@ html, body {
 
 #legend_unit {
   margin: 0;
-  margin-top: 2px;
+  margin-top: 3px;
+  padding-top: 2px;
+  color: #FFF;
+  text-shadow: 0px 0px 3px #000f;
+  font-size: 1.2em;
 }
 
 
@@ -119,7 +129,57 @@ html, body {
   cursor: pointer;
 }
 
-.case-photo {
-  border-radius: 4px;
+#info_window_header {
+  text-align: center;
+} 
 
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #111111;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: 52.5%;
+    /*background-repeat: no-repeat;*/
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#photo_display {
+    max-width: 100%; 
+    max-height: 100%;
+    border-radius: 4px;
 }

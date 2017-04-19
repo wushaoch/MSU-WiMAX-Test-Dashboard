@@ -1,4 +1,7 @@
+
+
 var map;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         scaleControl: true,
@@ -9,7 +12,7 @@ function initMap() {
         },
         streetViewControl: true,
         streetViewControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
         },
         center: {lat: 42.712063, lng: -84.478318}, // 42.712063, -84.478318
         // center: {lat: -25.363, lng: 131.044}, // test for window
@@ -17,13 +20,13 @@ function initMap() {
         mapTypeControl: true,
         fullscreenControl: true,
         fullscreenControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_TOP
+            position: google.maps.ControlPosition.RIGHT_TOP
         },
         rotateControl: true,
     });
 
-    // geolocation
 
+    // geolocation
     var infoWindow;
 
     infoWindow = new google.maps.InfoWindow;
@@ -61,9 +64,9 @@ function initMap() {
     var legend = document.getElementById('legend');
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
-    // detail window
-    var detail_box = document.getElementById('detail_box');
-    map.controls[google.maps.ControlPosition.LEFT_TOP].push(detail_box);
+    // // detail window
+    // var detail_box = document.getElementById('detail_box');
+    // map.controls[google.maps.ControlPosition.LEFT_TOP].push(detail_box);
 
     // Create a <script> tag and the source.
     var script = document.createElement('script');
@@ -94,10 +97,10 @@ function initMap() {
     var borderLinesCoordinates = [ 
         {lat: 42.686397,  lng: -84.52909124}, // left point : 42.692970, -84.515050
         {lat: 42.7176737, lng: -84.48485924}, // base station
-        {lat: 42.686397,  lng: -84.44062724} // right point: 42.690573, -84.456670
+        {lat: 42.686397,  lng: -84.44062724}  // right point: 42.690573, -84.456670
     ];
 
-    var borderLines = new google.maps.Polyline({
+    var borderLinesWhite = new google.maps.Polyline({
       path: borderLinesCoordinates,
       geodesic: true,
       strokeColor: '#FFFFFF',
@@ -105,7 +108,7 @@ function initMap() {
       strokeWeight: 3
     });
 
-    borderLines.setMap(map);
+    borderLinesWhite.setMap(map);
 
     // dim the legend when dragging
 
@@ -121,33 +124,94 @@ function initMap() {
         var receive_thp = event.feature.getProperty('received_throughput');
         var time        = event.feature.getProperty('time');
         var pos         = event.feature.getGeometry().get();
-        var window_content;
+        var id          = event.feature.getProperty('id');
+
+        
+        var window_content_header = "";
+        var window_content_body = "";
+        var window_content_footer = "";
+
+
+        // header content
 
         if (receive_thp == 999)
         {
-            window_content = "No successful connection<br>";
-        } 
+            window_content_header = "<b style='color:red;'>NO CONNECTION</b>";
+        }
         else {
+    
+            if (receive_thp < 25) {
+                window_content_header = "<b style='color:#FF9000;'>POOR CONNECTION</b>"; 
+            }
+            else {
+                window_content_header = "<b style='color:green;'>SUCCESSFUL CONNECTION</b>";
+            }
+
+            // body content if there is receive throughput
             var send_thp    = event.feature.getProperty('sent_throughput');
             var bsu_sig     = event.feature.getProperty('base_station_signal_strength');
             var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
             var bsu_snr     = event.feature.getProperty('base_station_SNR');
             var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
-            var window_content = 
-                             "Received Throughput: <b>" + receive_thp + "</b> Mbps<br>"
-                           + "Sent Throughput: <b>" + send_thp + "</b> Mbps<br>"
-                           + "BSU Signal: <b>" + bsu_sig + "</b> dBm<br>"
-                           + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
-                           + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
-                           + "SU SNR: <b>" + su_snr + "</b> dB<br>";
+            window_content_body = "Received Throughput: <b>" + receive_thp + "</b> Mbps<br>"
+                                + "Sent Throughput: <b>" + send_thp + "</b> Mbps<br>"
+                                + "BSU Signal: <b>" + bsu_sig + "</b> dBm<br>"
+                                + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
+                                + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
+                                + "SU SNR: <b>" + su_snr + "</b> dB<br>";
+
         }
 
-        window_content = window_content + pos + "<br>" + "Time: " + time + "<br>";
+        // footer content
+        window_content_footer = "Location: " + pos + "<br>" + "Date: " + time + "<br>" + "ID: " + id;
 
+        // put window content together
+        window_content_header = "<h4 id='info_window_header'>" + window_content_header + "</h4>";
+        window_content_body   = "<p  id='info_window_body'>"   + window_content_body   + "</p>";
+        window_content_footer = "<p  id='info_window_footer'>" + window_content_footer + "</p>";
+        
+        var window_content = window_content_header + window_content_body + window_content_footer;
+
+        // move to point clicked, set window content
         infoWindow.setPosition(pos);
         infoWindow.setContent(window_content);
         infoWindow.open(map);
         map.panTo(pos);
+
+        if (doesPhotoIDExist(id) == true)
+        {
+
+            var photoURL = "'photos/" + id + ".jpg'";
+            var modal = document.getElementById('myModal');
+            var modal_content = document.getElementById('modal_content');
+            var btn = document.getElementById("info_window_header");
+
+            // add underline to those who have photo
+            var info_window_header = document.getElementById('info_window_header');
+            info_window_header.setAttribute("style", "text-decoration: underline;");
+
+            // add photo to modal
+            modal_content.setAttribute("style", 
+                "background-image: url(" + photoURL + "); \
+                background-size: cover; \
+                background-repeat: no-repeat; \
+                background-position: 50% 50%; \
+            ");
+
+            // When the user clicks on the button, open the modal 
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+
     });
 
     // create circles for data points
@@ -171,7 +235,7 @@ function initMap() {
                             100,
                             0
                             );
-        map.data.overrideStyle(event.feature, {icon: getCircle(mag_normalized, 11, 3)});
+        map.data.overrideStyle(event.feature, {icon: getCircle(mag_normalized, 11, 3, 1)});
     });
 
     map.data.addListener('mouseout', function(event) {
@@ -179,12 +243,12 @@ function initMap() {
     });
 }
 
-function getCircle(mag_normalized, circle_scale=7, stroke=2) {
+function getCircle(mag_normalized, circle_scale=7, stroke=2, opacity=0.8) {
     var color = getColor(mag_normalized);
     return {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: color,
-        fillOpacity: 1,
+        fillOpacity: opacity,
         scale: circle_scale,
         strokeColor: 'black',
         strokeWeight: stroke,
@@ -204,6 +268,7 @@ function normalizeMag(mag, max, min) { // normalize to 0-100,
 }
 
 function getColor(mag) {
+
     // intensity on a scale range from 0 to 100
     if (mag == -1) 
     {
