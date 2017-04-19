@@ -102,12 +102,19 @@ html, body {
 }
 
 .close {
-    color: #black;
-    margin-top: -5px;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: white;
+  float: right;
+  font-size: 23px;
+  font-weight: bold;
+  /*animation: close_btn_animation 10s ease-in-out infinite;*/
+  height: 28px;
+  width: 28px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 2px;
 }
+
 
 .close:hover,
 .close:focus {
@@ -115,6 +122,8 @@ html, body {
     text-decoration: none;
     cursor: pointer;
 }
+
+
 
 
 
@@ -177,5 +186,51 @@ html, body {
     width: 60%; /* Could be more or less, depending on screen size */
     height: 52.5%;
     /*background-repeat: no-repeat;*/
+}
+
+
+
+// search box (autocomplete)
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
 }
 

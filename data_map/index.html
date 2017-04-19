@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="assets/styles.css"> <!-- Customized Style -->
   </head>
   <body>
+    <!-- search box -->
+    <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"> -->
     <div id="map"></div>
     <div id="legend">
       <div id="legend_body">
@@ -31,8 +33,11 @@
 </div>
     <script src="assets/map_setup.js"></script>
     <script src="assets/does_photo_exist.js"></script>
-    <script async defer
+    <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFKN2J3nWNrEtJ3D9hD8HoRuxmpM0V-Ak&callback=initMap">
-    </script>
+    </script> -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFKN2J3nWNrEtJ3D9hD8HoRuxmpM0V-Ak&libraries=places&callback=initAutocomplete"
+         async defer></script>
   </body>
 </html>
