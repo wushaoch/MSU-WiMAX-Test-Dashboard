@@ -102,7 +102,8 @@ html, body {
 }
 
 .close {
-    color: #aaa;
+    color: #black;
+    margin-top: -5px;
     float: right;
     font-size: 28px;
     font-weight: bold;
