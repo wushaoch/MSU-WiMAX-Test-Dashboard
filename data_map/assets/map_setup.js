@@ -103,7 +103,7 @@ function initMap() {
     var borderLinesWhite = new google.maps.Polyline({
       path: borderLinesCoordinates,
       geodesic: true,
-      strokeColor: '#FFFFFF',
+      strokeColor: '#000',
       strokeOpacity: 1.0,
       strokeWeight: 3
     });
