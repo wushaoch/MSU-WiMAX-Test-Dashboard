@@ -13,7 +13,7 @@ What you need:
 
   * A modern browser (i.e. Chrome, IE, Firefox, Safari etc.)
   * Javascript enabled
-  * Google Map API key
+  * **Google Map API key**
   
 ## Built With
 
