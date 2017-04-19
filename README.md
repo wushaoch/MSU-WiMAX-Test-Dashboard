@@ -1,14 +1,35 @@
-# ECE480-WiMAX
+# MSU WiMAX Test Dashboard
 
+This web-based dashboard and is: 
 
-WiMAX Dashboard &amp; Map Data<br>
+  1. To receive and display mictrotroller-sent signals across WiMAX network on MSU campus
+  2. To simutaneously show video feed at the remote site
+  3. To convert WiMAX test results to GeoJSON format in preparation of data map
+  4. To display test results with integration of Google Map API
 
-<hl>
+## Getting Started
 
-___
+What you need:
 
+  * A modern browser (i.e. Chrome, IE, Firefox, Safari etc.)
+  * Javascript enabled
+  * Google Map API key
+  
+## Built With
 
+* [Google Map Javascript API](https://developers.google.com/maps/documentation/javascript/)
 
-Google Map API Example (Visualizing data): https://developers.google.com/maps/documentation/javascript/earthquakes<br>
-Google Map API Example (Importing data): https://developers.google.com/maps/documentation/javascript/importing_data#data<br>
-GeoJSON specs is for inputting data entries: http://geojson.org/geojson-spec.html
+## Authors
+
+* **Shaochong Wu** - *Initial Work, Dashboard, Data-Map Integration & Customization* - wushaoch(https://github.com/wushaoch)
+* **Alex Zajac** - *Data Management, Data Converstion* - zajacale(https://github.com/zajcale)
+
+## Acknowledgements
+
+Thank everybody for collecting the data!
+* **Tharo Soun** - *Smart Guy, (Consultant for everybody)* - sounthar(https://github.com/sounthar)
+* **Billy Stevers** - *Data Collection, On-site Photos* - Team Manager, Hardware guy
+* **Prathamesh Kulkarni** - *Data Collection* - Made data collection simple with his Android App
+
+## Resources
+
