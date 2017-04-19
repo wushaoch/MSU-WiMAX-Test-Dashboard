@@ -1,0 +1,236 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+p {
+  color: #000;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#legend {
+  min-width: 40px;
+  max-width: 56px;
+  font-family: Arial, sans-serif;
+  /*background: #111;*/
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px;
+  margin: 0;
+  /*border: 1px solid #FFF;*/
+  height: 60%;
+  opacity: 1;
+  transition: opacity .3s ease;
+  border-radius: 3px;
+  margin-left: 6px;
+}
+#legend:hover {
+  /*opacity: 0.3;*/
+}
+#legend_header h5 {
+  margin: 0 0 7% 0;
+  padding: 0;
+}
+#legend_body {
+  height: 95%;
+  margin: 0;
+}
+  #legend_body_left, #legend_body_right {
+    text-align: right;
+    height: 100%;
+    
+    margin: 0;
+    padding: 0;
+  }
+
+  #legend_body_left {
+    float: left;
+    width: 40%;
+    margin-left: -2px;
+  }
+
+  #legend_body_right {
+    float: right;
+    width: 60%;
+    align-content: space-between;
+    margin-left: -2px;
+  }
+
+  #legend_body_right p {
+    height: 25%;
+    margin: 0;
+    color: #FFF;
+    text-shadow: 0px 0px 3px #000; 0px 0px 3px #000;
+    font-size: 1.2em;
+  }
+
+  #legend_body_right span {
+
+    margin: 0;
+    -webkit-flex: 1;  /* Safari 6.1+ */
+    -ms-flex: 1;  /* IE 10 */    
+    flex: 1;
+  }
+
+  #legend_gradient_map {
+    height: 100%;
+    width: 45%;
+    margin: auto;
+    background: -moz-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #00ff61 0%, #a0e22d 25%, #ffe000 50%, #ff9000 96%, #ff0000 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border-radius: 2px;
+    box-shadow: 0px 0px 3px #000;
+  }
+#legend_footer {
+  margin: auto;
+  text-align: center;
+}
+
+#legend_unit {
+  margin: 0;
+  margin-top: 3px;
+  padding-top: 2px;
+  color: #FFF;
+  text-shadow: 0px 0px 3px #000f;
+  font-size: 1.2em;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 23px;
+  font-weight: bold;
+  /*animation: close_btn_animation 10s ease-in-out infinite;*/
+  height: 28px;
+  width: 28px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 2px;
+}
+
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+/*style info window
+
+.gm-style .gm-style-iw {
+  background: rgba(0, 0, 0, 0.6) !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2px !important;
+  min-height: 120px !important;
+  padding-top: 10px;
+  display: block !important;
+} 
+*/
+
+
+#info_window_header {
+  text-align: center;
+} 
+
+.underline {
+  animation: header_animation 2s ease-in-out infinite;
+  border-radius: 3px;
+}
+
+.underline:hover {
+  cursor: pointer;
+}
+
+@keyframes header_animation {
+    0% {background-color: white;}
+    50% {background-color: silver;}
+    100% {background-color: white;}
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #111111;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: 52.5%;
+    /*background-repeat: no-repeat;*/
+}
+
+
+
+// search box (autocomplete)
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
