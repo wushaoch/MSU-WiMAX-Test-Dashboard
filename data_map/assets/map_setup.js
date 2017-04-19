@@ -188,7 +188,7 @@ function initMap() {
 
             // add underline to those who have photo
             var info_window_header = document.getElementById('info_window_header');
-            info_window_header.setAttribute("style", "text-decoration: underline;");
+            info_window_header.setAttribute("class", "underline");
 
             // add photo to modal
             modal_content.setAttribute("style", 

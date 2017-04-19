@@ -131,8 +131,20 @@ html, body {
   text-align: center;
 } 
 
+.underline {
+  animation: header_animation 2s ease-in infinite;
+  border-radius: 3px;
+}
 
+.underline:hover {
+  background-color: yellow;
+}
 
+@keyframes header_animation {
+    0% {background-color: white;}
+    50% {background-color: gray;}
+    100% {background-color: white;}
+}
 
 /* The Modal (background) */
 .modal {
