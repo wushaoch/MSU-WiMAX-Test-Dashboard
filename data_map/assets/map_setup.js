@@ -163,7 +163,7 @@ function initMap() {
         }
 
         // footer content
-        window_content_footer = "Location: " + pos + "<br>" + "Date: " + time + "<br>" + "ID: " + id;
+        window_content_footer =  "Date: " + time + "<br>" + "ID: " + id;
 
         // put window content together
         window_content_header = "<h4 id='info_window_header'>" + window_content_header + "</h4>";
