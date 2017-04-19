@@ -132,17 +132,17 @@ html, body {
 } 
 
 .underline {
-  animation: header_animation 2s ease-in infinite;
+  animation: header_animation 2s ease-in-out infinite;
   border-radius: 3px;
 }
 
 .underline:hover {
-  background-color: yellow;
+  cursor: pointer;
 }
 
 @keyframes header_animation {
     0% {background-color: white;}
-    50% {background-color: gray;}
+    50% {background-color: silver;}
     100% {background-color: white;}
 }
 
