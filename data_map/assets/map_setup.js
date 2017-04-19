@@ -165,7 +165,7 @@ function initAutocomplete() {
 
 
     var base_station = {lat: 42.7176737, lng: -84.48485924};
-    var base_station_image = "assets/triangle.png";
+    var base_station_image = "assets/base_station.png";
 
     var base_station_marker = new google.maps.Marker({
         position: base_station,
@@ -193,9 +193,9 @@ function initAutocomplete() {
 
     // dim the legend when dragging
 
-    map.data.addListener('drag', function(event) {
-        document.getElementById("legend").style.opacity = "0";
-    });
+    // map.event.addListener('drag', function(event) {
+    //     document.getElementById("legend").style.opacity = "0";
+    // });
 
     // update detail box (which is on top left)
 
@@ -206,6 +206,7 @@ function initAutocomplete() {
         var time        = event.feature.getProperty('time');
         var pos         = event.feature.getGeometry().get();
         var id          = event.feature.getProperty('id');
+        //var distance_to_base = google.maps.geometry.spherical.computeDistanceBetween(base_station, pos);
 
         
         var window_content_header = "";
@@ -468,6 +469,3 @@ function datafeed_callback(results) {
     map.data.addGeoJson(results);
 }
 
-function close_detail_box(){
-    document.getElementById("detail_box").style.display = "none";
-}
