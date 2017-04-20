@@ -34,7 +34,7 @@ Thank everybody for collecting the data!
 ## Resources
 
   ### Optimization Tools
-  * [Closure Javascript Compiler](https://closure-compiler.appspot.com/home/)
+  * [Closure Javascript Compiler](https://closure-compiler.appspot.com/)
   * [CSS Minifier](https://cssminifier.com/)
     
     
