@@ -235,8 +235,8 @@ function initAutocomplete() {
             var su_sig      = event.feature.getProperty('subscriber_unit_signal_strength');
             var bsu_snr     = event.feature.getProperty('base_station_SNR');
             var su_snr      = event.feature.getProperty('subscriber_unit_SNR');
-            window_content_body = "Received Throughput: <b>" + receive_thp + "</b> Mbps<br>"
-                                + "Sent Throughput: <b>" + send_thp + "</b> Mbps<br>"
+            window_content_body = "Downlink Throughput: <b>" + receive_thp + "</b> Mbps<br>"
+                                + "Uplink Throughput: <b>" + send_thp + "</b> Mbps<br>"
                                 + "BSU Signal: <b>" + bsu_sig + "</b> dBm<br>"
                                 + "SU Signal: <b>" + su_sig + "</b> dBm<br>"
                                 + "BSU SNR: <b>" + bsu_snr + "</b> dB<br>"
