@@ -7,6 +7,9 @@ import xml.etree.ElementTree as ET
 import datetime
 
 def read_csv_file(filename):
+	"""
+	Used to read in the csv file
+	""" 
     data = []
     while True:
         try:
@@ -23,6 +26,7 @@ def read_csv_file(filename):
     return data
 
 def convert_to_datetime(unixtime):
+	# UCT time
     return datetime.datetime.fromtimestamp(int(unixtime)).strftime('%Y-%m-%d %H:%M:%S')
 
 def write_geojson_file(filename, data, rows, title_data):
@@ -39,9 +43,9 @@ def write_geojson_file(filename, data, rows, title_data):
     with open(filename, "w") as jsonfile:
         jsonfile.write(edata)
         for line in data:
-            entry = OrderedDict()
+            entry = OrderedDict() #ordered dictionary
             entry["type"] = "Feature"
-            properties = OrderedDict()
+            properties = OrderedDict() #nest dictionary inside of entry
             for row in rows:
                 if str(row) in "56":
                     properties[keys[row]] = -float(line[row])
@@ -61,6 +65,7 @@ def write_geojson_file(filename, data, rows, title_data):
             entry["geometry"] = geometry
             jfilecontents.append(entry)
         title_data["features"]=jfilecontents
+		# the values below are required to read in the GeoJSON file
         title_data["bbox"] = [-179.6897, -60.5845, 0, 179.8707, 69.6244, 556.1]
         json.dump(title_data, jsonfile)
         jsonfile.write(");")
@@ -102,6 +107,9 @@ def average_data(data, num, rows):
     return averaged_data
 
 def write_title(filename):
+	"""
+	GeoJSON format requires this title
+	"""
     with open(filename, "w") as titlefile:
         titlefile.write("datafeed_callback(")
         type_dict = OrderedDict()
@@ -115,18 +123,13 @@ def write_title(filename):
         type_dict["metadata"] = metadata
         return type_dict
         
-#print("Number of csv files to be averaged: ")
-#csvs = int(sys.stdin.readline())
-#all_csvs = []
-#for i in range(csvs):
+
 print("CSV filename (input): ")
 csvfilename = sys.stdin.readline()
 csvfilename = csvfilename.strip('\n')
 csvdata = read_csv_file(csvfilename)
-#all_csvs.append(csvdata)
 options = print_options()
 if options:
-    #avgd_data = average_data(all_csvs, csvs, options[0])
     print("JSON filename (output): ")
     jsonfilename = sys.stdin.readline()
     jsonfilename = jsonfilename.strip('\n')
@@ -137,8 +140,6 @@ if options:
             title_data = write_title(jsonfilename)
             write_geojson_file(jsonfilename, csvdata, options[0], title_data)
         elif options[1] == "no\n":
-            #title_data = retrieve_titledata()
-            #write_geojson_file(jsonfilename, avgd_data, options[0], title_data)
             print("Adding to existing GeoJSON file feature not supported yet.")
         else:
             print("Not a valid response.")
